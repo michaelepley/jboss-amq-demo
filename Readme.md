@@ -1,0 +1,1 @@
+Some simple scripts that show how to set up and use Red Hat JBoss A-MQ with Red Hat Openshift Container Platform.
