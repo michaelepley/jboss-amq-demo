@@ -60,20 +60,20 @@ echo "	--> Create a route to the frontend"
 [ "`oc get route -l app=fuse-amq | wc -l`" == 0 ] &&  oc create route passthrough ${OPENSHIFT_APPLICATION_NAME} --service=${OPENSHIFT_APPLICATION_NAME}-amq-tcp-ssl
 ! [ $? == 0 ] && echo "FAILED" && exit 1
 
-echo "	--> MANUALLY CREATE an maven project using the in JBDS using:"
+echo "	--> MANUALLY CREATE an maven project using the camel-archetype-activemq archetype in JBoss Developer Studio using:"
 echo "		--> Camel Context: "
 
-cat > camel-context.xml << EOF_AMQ_CAMEL_CONTEXT
+cat > camel-context-fragment.xml << EOF_AMQ_CAMEL_CONTEXT
 <bean id="activemq" class="org.apache.activemq.ActiveMQSslConnectionFactory">
-	<property name="brokerURL"          value="failover://ssl://https://${OPENSHIFT_APPLICATION_NAME}-${OPENSHIFT_PRIMARY_PROJECT}.${OPENSHIFT_PRIMARY_APPS}:443" />
+	<property name="brokerURL"          value="failover://ssl://${OPENSHIFT_APPLICATION_NAME}-${OPENSHIFT_PRIMARY_PROJECT}.${OPENSHIFT_PRIMARY_APPS}:443" />
 	<property name="userName"           value="admin" />
 	<property name="password"           value="password" />
 	<property name="trustStore"         value="$(pwd)/amq-client.ts" />
 	<property name="trustStorePassword" value="password" />
-	<property name="trustStore"         value="$(pwd)/amq-client.ts" />
-	<property name="trustStorePassword" value="password" />
+	<property name="keyStore"           value="$(pwd)/amq-client.ks" />
+	<property name="keyStorePassword"   value="password" />
 </bean>
 EOF_AMQ_CAMEL_CONTEXT
-cat camel-context.xml
+cat camel-context-fragment.xml
 
 echo "Done"

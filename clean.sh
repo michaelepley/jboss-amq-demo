@@ -20,6 +20,6 @@ rm amq-client_cert
 rm amq-client.ks
 rm amq-client.ts
 echo "	--> Delete camel artifacts"
-rm camel-context.xml
+rm camel-context-fragment.xml
 echo "	--> You may choose to delete the eclipse project"
 echo "Done"
