@@ -22,8 +22,8 @@ echo "	--> If you want to make trusted also the client, you must export the clie
 echo "	--> Import the clients exported certificate into a broker SERVER truststore"
 echo yes | keytool -import -alias amq-client -keystore amq-server.ts -storepass password -file amq-client_cert
 ! [ $? == 0 ] && echo "FAILED" && exit 1
-echo "	--> Verify the contents of the keystore"
-[ "`keytool -list -keystore amq-server.ts -storepass password| grep amq-server | wc -l`" == 0 ] && echo "FAILED" && exit 1
+#echo "	--> Verify the contents of the keystore"
+#[ "`keytool -list -keystore amq-server.ts -storepass password| grep amq-server | wc -l`" == 0 ] && echo "FAILED" && exit 1
 echo "	--> Verify the contents of the keystore"
 [ "`keytool -list -keystore amq-server.ks -storepass password| grep amq-server | wc -l`" == 0 ] && echo "FAILED" && exit 1
 echo "	--> Verify the contents of the keystore"
